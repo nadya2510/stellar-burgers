@@ -22,7 +22,7 @@ export const checkUserAuth = createAsyncThunk(
   async (_, { dispatch }) => {
     if (isTokenExists()) {
       getUserApi()
-        .then((user) => dispatch(setUser(user)))
+        .then((user) => dispatch(setUser(user.user)))
         .finally(() => dispatch(setIsAuthChecked(true)));
     } else {
       dispatch(setIsAuthChecked(true));

@@ -13,7 +13,7 @@ import {
   selectUser
 } from '@selectors';
 import { fetchBurgerOrder, clearConstructorOrdert, clearOrdert } from '@slices';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const constructorItems = useSelector<TConstructorItems>(

@@ -15,16 +15,16 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   return (
     <header className={styles.header}>
       <nav className={`${styles.menu} p-4`}>
-        {location.pathname !== '/' ? (
-          <NavLink to={'/'} className={styles.link}>
-            <BurgerIcon type={'primary'} />
-            <p className='text text_type_main-default ml-2 mr-10'>
-              Конструктор
-            </p>
-          </NavLink>
-        ) : (
-          <></>
-        )}
+        <NavLink
+          to={'/'}
+          className={clsx({
+            [styles.link]: true,
+            [styles.active]: location.pathname === '/'
+          })}
+        >
+          <BurgerIcon type={'primary'} />
+          <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+        </NavLink>
         <NavLink
           to={'/feed'}
           className={clsx({
