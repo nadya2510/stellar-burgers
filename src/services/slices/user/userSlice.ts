@@ -61,7 +61,6 @@ export const userSlice = createSlice({
       .addCase(fetchRegisterUser.fulfilled, (state, action) => {
         state.isAuthChecked = true;
         state.user = action.payload.user;
-        console.log('fetchRegisterUser');
       });
   }
 });
