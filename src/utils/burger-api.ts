@@ -30,8 +30,9 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      localStorage.setItem('refreshToken', refreshData.refreshToken);
-      setCookie('accessToken', refreshData.accessToken);
+      // localStorage.setItem('refreshToken', refreshData.refreshToken);
+      // setCookie('accessToken', refreshData.accessToken);
+      storeTokens(refreshData.accessToken, refreshData.refreshToken);
       return refreshData;
     });
 
@@ -70,7 +71,6 @@ type TFeedsResponse = TServerResponse<{
 type TOrdersResponse = TServerResponse<{
   data: TOrder[];
 }>;
-
 export const getIngredientsApi = () =>
   fetch(`${URL}/ingredients`)
     .then((res) => checkResponse<TIngredientsResponse>(res))
@@ -153,6 +153,7 @@ export const registerUserApi = (data: TRegisterData) =>
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
+      storeTokens(data.accessToken, data.refreshToken);
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -172,6 +173,7 @@ export const loginUserApi = (data: TLoginData) =>
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
+      storeTokens(data.accessToken, data.refreshToken);
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -232,4 +234,12 @@ export const logoutApi = () =>
     body: JSON.stringify({
       token: localStorage.getItem('refreshToken')
     })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+  }).then((res) => {
+    checkResponse<TServerResponse<{}>>(res);
+  });
+
+export const isTokenExists = (): boolean => !!getCookie('accessToken');
+export const storeTokens = (accessToken: string, refreshToken: string) => {
+  localStorage.setItem('refreshToken', String(refreshToken));
+  setCookie('accessToken', String(accessToken));
+};
