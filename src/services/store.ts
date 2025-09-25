@@ -12,14 +12,14 @@ import {
   orderSlice
 } from '@slices';
 
-export const rootReducer = combineSlices({
+const rootReducer = combineSlices({
   constructorSlice: constructorSlice.reducer,
   ingredientsSlice: ingredientsSlice.reducer,
   userSlice: userSlice.reducer,
   orderSlice: orderSlice.reducer
 });
 
-export const store = configureStore({
+const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });

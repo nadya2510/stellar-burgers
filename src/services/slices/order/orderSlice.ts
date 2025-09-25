@@ -42,7 +42,6 @@ export const orderSlice = createSlice({
       })
       .addCase(fetchBurgerOrder.rejected, (state, action) => {
         state.isLoad = false;
-        state.error = action.error.message ?? null;
       })
       .addCase(fetchBurgerOrder.fulfilled, (state, action) => {
         state.orderData = action.payload.order;
@@ -87,5 +86,5 @@ export const orderSlice = createSlice({
 });
 
 export const { clearOrdert } = orderSlice.actions;
-export { initialState as initialStateOrder };
-export default orderSlice.reducer;
+
+export default orderSlice.reducerPath;

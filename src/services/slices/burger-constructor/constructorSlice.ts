@@ -6,7 +6,7 @@ import {
 } from '@utils-types';
 import { nanoid } from 'nanoid';
 
-export type TConstructorSliceState = {
+type TConstructorSliceState = {
   constructorItems: TConstructorItems;
 };
 
@@ -72,5 +72,4 @@ export const {
   clearConstructorOrdert
 } = constructorSlice.actions;
 
-export default constructorSlice.reducer;
-//export default constructorSlice.reducer;
+export default constructorSlice.reducerPath;
