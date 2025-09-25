@@ -10,11 +10,14 @@ import { fetchOrderByNumber } from '@slices';
 export const OrderInfo: FC = () => {
   const ingredients = useSelector<TIngredient[]>(selectIngredients);
   const orderData = useSelector<TOrder | null>(selectOrderModalData);
-  const number = useParams<{ number: string }>();
+
+  const { number } = useParams<{ number: string }>();
+  const index = parseInt(number!);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrderByNumber(Number(number)));
+    dispatch(fetchOrderByNumber(index));
   }, [dispatch]);
 
   const orderInfo = useMemo(() => {
