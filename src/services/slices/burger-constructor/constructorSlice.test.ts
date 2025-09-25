@@ -14,15 +14,15 @@ import {
   bunAdd
 } from './constructorData';
 
+const initialState = {
+  constructorItems: {
+    bun: mockBun,
+    ingredients: [mockIngredient1, mockIngredient2]
+  }
+};
+
 describe('Проверка слайса constructorSlice', () => {
   test('добавления ингредиента', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
-
     const store = reducer(initialState, addIngredient(ingredientAdd));
 
     const expectedIngredients = [mockIngredient1, mockIngredient2];
@@ -37,25 +37,12 @@ describe('Проверка слайса constructorSlice', () => {
   });
 
   test('замена булки', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
-
     const store = reducer(initialState, addIngredient(bunAdd));
     const receivedBun = store.constructorItems.bun;
     expect(receivedBun).toEqual(bunAdd);
   });
 
   test('изменения порядка ингредиентов в начинке (вниз)', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
     const indexIngredients = 0;
     const store = reducer(
       initialState,
@@ -69,12 +56,6 @@ describe('Проверка слайса constructorSlice', () => {
   });
 
   test('изменения порядка ингредиентов в начинке (верх)', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
     const indexIngredients = 1;
     const store = reducer(
       initialState,
@@ -88,13 +69,6 @@ describe('Проверка слайса constructorSlice', () => {
   });
 
   test('удаления ингредиента', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
-
     const store = reducer(initialState, removeIngredient(mockIngredient1));
 
     const expectedIngredients = [mockIngredient2];
@@ -107,13 +81,6 @@ describe('Проверка слайса constructorSlice', () => {
   });
 
   test('удаления булки', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
-
     const store = reducer(
       initialState,
       removeIngredient({ ...mockBun, id: mockBun._id })
@@ -125,13 +92,6 @@ describe('Проверка слайса constructorSlice', () => {
   });
 
   test('очистка конструктора', () => {
-    const initialState = {
-      constructorItems: {
-        bun: mockBun,
-        ingredients: [mockIngredient1, mockIngredient2]
-      }
-    };
-
     const store = reducer(initialState, clearConstructorOrdert());
 
     const expected = {
